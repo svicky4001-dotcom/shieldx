@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShieldWatch — Digital Risk Protection Login</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --neon:#6c63ff;--neon2:#00d4ff;--neon3:#ff6b9d;
+      --dark:#050714;--card:rgba(12,15,35,0.85);
+    }
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--dark);
+      min-height:100vh;
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;position:relative;
+    }
+    .bg-canvas{position:fixed;inset:0;z-index:0;}
+    .orb{position:absolute;border-radius:50%;filter:blur(80px);animation:float 8s ease-in-out infinite;}
+    .orb1{width:500px;height:500px;background:radial-gradient(circle,#6c63ff44,transparent);top:-100px;left:-100px;}
+    .orb2{width:400px;height:400px;background:radial-gradient(circle,#00d4ff33,transparent);bottom:-80px;right:-80px;animation-delay:3s;}
+    .orb3{width:300px;height:300px;background:radial-gradient(circle,#ff6b9d22,transparent);top:40%;left:50%;animation-delay:5s;}
+    @keyframes float{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-30px) scale(1.05);}}
+
+    .grid-bg{
+      position:fixed;inset:0;z-index:0;
+      background-image:linear-gradient(rgba(108,99,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(108,99,255,0.04) 1px,transparent 1px);
+      background-size:60px 60px;
+    }
+
+    .container{
+      position:relative;z-index:10;
+      display:flex;align-items:center;justify-content:center;
+      width:100%;min-height:100vh;padding:20px;
+    }
+
+    .login-card{
+      background:rgba(10,13,31,0.85);
+      backdrop-filter:blur(40px);
+      border:1px solid rgba(255,255,255,0.12);
+      border-radius:28px;
+      padding:44px 40px;
+      width:100%;max-width:480px;
+      box-shadow:0 0 80px rgba(108,99,255,0.2),0 40px 80px rgba(0,0,0,0.5);
+      animation:cardIn 0.6s ease-out;
+    }
+    @keyframes cardIn{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+
+    .logo-wrap{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
+    .logo-icon{
+      width:52px;height:52px;border-radius:14px;
+      background:linear-gradient(135deg,#6c63ff,#00d4ff);
+      display:flex;align-items:center;justify-content:center;
+      font-size:24px;box-shadow:0 0 30px rgba(108,99,255,0.5);
+    }
+    .logo-name{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#fff;}
+    .logo-sub{font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;}
+
+    .heading h1{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;color:#fff;}
+    .heading p{font-size:13px;color:rgba(255,255,255,0.45);margin-top:4px;}
+
+    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);margin:20px 0;}
+
+    .form-group{margin-bottom:16px;}
+    .form-label{display:block;font-size:11px;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:6px;}
+    .input-wrap{position:relative;}
+    .input-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:16px;opacity:0.5;}
+    .form-input,.form-select{
+      width:100%;padding:12px 16px 12px 44px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:12px;
+      color:#fff;font-size:14px;font-family:'Inter',sans-serif;
+      outline:none;transition:all 0.3s;
+    }
+    .form-select option{background:#0a0d1f;color:#fff;}
+    .form-input:focus,.form-select:focus{border-color:#6c63ff;background:rgba(108,99,255,0.08);box-shadow:0 0 0 3px rgba(108,99,255,0.15);}
+
+    .btn-login{
+      width:100%;padding:14px;
+      background:linear-gradient(135deg,#6c63ff,#00d4ff);
+      border:none;border-radius:12px;
+      color:#fff;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;
+      cursor:pointer;transition:all 0.3s;
+      box-shadow:0 4px 30px rgba(108,99,255,0.4);
+      margin-top:8px;
+    }
+    .btn-login:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(108,99,255,0.6);}
+
+    .security-badge{
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      margin-top:20px;padding:10px;
+      background:rgba(255,255,255,0.03);border-radius:8px;
+      border:1px solid rgba(255,255,255,0.06);font-size:11px;color:rgba(255,255,255,0.4);
+    }
+    .badge-dot{width:6px;height:6px;background:#22c55e;border-radius:50%;box-shadow:0 0 8px #22c55e;}
+  </style>
+</head>
+<body>
+  <div class="bg-canvas"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div></div>
+  <div class="grid-bg"></div>
+
+  <div class="container">
+    <div class="login-card">
+      <div class="logo-wrap">
+        <div class="logo-icon">🛡️</div>
+        <div>
+          <div class="logo-name">ShieldWatch</div>
+          <div class="logo-sub">Digital Risk Protection Portal</div>
+        </div>
+      </div>
+
+      <div class="heading">
+        <h1>Enterprise Security Login</h1>
+        <p>Sign in to launch your Brand Protection Console</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label">Select Security Role</label>
+          <div class="input-wrap">
+            <span class="input-icon">👤</span>
+            <select class="form-select" id="role">
+              <option value="Super Admin">Super Admin (Chief Information Security Officer)</option>
+              <option value="Brand Protection Officer">Brand Protection Specialist</option>
+              <option value="SOC Analyst">SOC Threat Analyst</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Company Login ID / Work Email</label>
+          <div class="input-wrap">
+            <span class="input-icon">✉️</span>
+            <input type="text" class="form-input" id="email" value="admin@hdfcbank.com" placeholder="e.g. admin@company.com" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input type="password" class="form-input" id="password" value="••••••••••••" required />
+          </div>
+        </div>
+
+        <button type="submit" class="btn-login" id="loginBtn">Authenticate & Launch Dashboard →</button>
+      </form>
+
+      <div class="security-badge">
+        <div class="badge-dot"></div>
+        <span>SOC-2 Type II Certified · 256-bit Encrypted Token Connected</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function handleLogin(e) {
+      e.preventDefault();
+      const btn = document.getElementById('loginBtn');
+      const email = document.getElementById('email').value;
+      const role = document.getElementById('role').value;
+
+      btn.textContent = 'Authenticating Security Token... 🚀';
+      btn.style.opacity = '0.85';
+
+      localStorage.setItem('shieldwatch_user', JSON.stringify({ email, role, loggedInAt: new Date().toISOString() }));
+
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 700);
+    }
+  </script>
+</body>
+</html>
